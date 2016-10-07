@@ -13,5 +13,5 @@ define all = j l+ l- vl vl~
 import model VLQ_UFO
 define bb = b b~
 define ww = w+ w-
-generate p p > bb ww bb / x y bp QCD=0 QED=1 VLQ<=2 , ww > all all
+generate p p > bb ww bb j / x y bp QCD=1 QED=1 VLQ<=2 , ww > all all
 output bWbj_TL_M800GeV_W10p -nojpeg
