@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# RUN: python python copy_cards.py --channel bWbj_YL
+# RUN: python python copy_cards.py --channel bWbj_TL
 import os, sys, time,math
 import subprocess
 from optparse import OptionParser
@@ -26,6 +26,9 @@ run="_run_card.dat"
 run="_run_card.dat"
 decay="_madspin_card.dat"
 
+fprocess = open('../../submit'+str(channel)+'.sh', 'w')
+fprocess.write('#!/bin/bash \n')
+
 for m in range(0,len(mass)):
   for w in range(0,len(width)):
     print str(mass[m])+"  "+str(width[w])+"  "+str(float(mass[m]*width[w]/100))
@@ -37,7 +40,7 @@ for m in range(0,len(mass)):
     fileprocbase =  folderbase+folderbaseMW+slash+folderbaseMW+proc
     fileEMbase =  folderbase+folderbaseMW+slash+folderbaseMW+EM
     filerunbase =  folderbase+folderbaseMW+slash+folderbaseMW+run
-    filerdecaybase =  folderbase+folderbaseMW+slash+folderbaseMW+decay
+    filedecaybase =  folderbase+folderbaseMW+slash+folderbaseMW+decay
     #
     folder= channel+slash
     folderMW=channel+toMass+str(mass[m])+toWidth+str(width[w])+"p"
@@ -77,5 +80,6 @@ for m in range(0,len(mass)):
        fp.seek(0)
        fp.truncate()
        fp.write(content.replace('80.0', str(float(mass[m]*width[w]/100))))
-
+    fprocess.write('./gridpack_generation.sh '+channel+toMass+str(mass[m])+toWidth+str(width[w])+"p cards/"+channel+toMass+str(mass[m])+toWidth+str(width[w])+' 1nh & \n')
+fprocess.close()
 
