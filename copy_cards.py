@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-# RUN: python python copy_cards.py --channel bWbj_TL
+# RUN: python copy_cards.py --channel bWbj_TL
 import os, sys, time,math
 import subprocess
+from random import randint
 from optparse import OptionParser
 parser = OptionParser()
 
@@ -26,8 +27,16 @@ run="_run_card.dat"
 run="_run_card.dat"
 decay="_madspin_card.dat"
 
-fprocess = open('../../submit'+str(channel)+'.sh', 'w')
+fprocess = open('../../submit_'+str(channel)+'.sh', 'w')
 fprocess.write('#!/bin/bash \n')
+
+fsetup = open('../../setup_'+str(channel)+'.sh', 'w')
+fsetup.write('#!/bin/bash \n')
+fsetup.write('mkdir '+channel+'\n')
+
+
+frun = open('../../run_'+str(channel)+'.sh', 'w')
+frun.write('#!/bin/bash \n')
 
 for m in range(0,len(mass)):
   for w in range(0,len(width)):
@@ -80,6 +89,22 @@ for m in range(0,len(mass)):
        fp.seek(0)
        fp.truncate()
        fp.write(content.replace('80.0', str(float(mass[m]*width[w]/100))))
-    fprocess.write('./gridpack_generation.sh '+channel+toMass+str(mass[m])+toWidth+str(width[w])+"p cards/"+channel+toMass+str(mass[m])+toWidth+str(width[w])+' 1nh & \n')
+    ####################################################################################
+    # make scripts to run
+    ###################################################################################
+    fprocess.write('./gridpack_generation.sh '+channel+toMass+str(mass[m])+toWidth+str(width[w])+"p cards/singleVLQ_wide/"+\
+                    channel+slash+channel+toMass+str(mass[m])+toWidth+str(width[w])+'p 1nh & \n')
+    dirrun=channel+slash+channel+toMass+str(mass[m])+toWidth+str(width[w])+'p'
+    fsetup.write('mkdir '+dirrun+" \n"+\
+                 'mv '+channel+toMass+str(mass[m])+toWidth+str(width[w])+'p_tarball.tar.xz ' +dirrun+" \n"+\
+                 'cd '+dirrun+"\n"+\
+                 'tar xvfJ '+channel+toMass+str(mass[m])+toWidth+str(width[w])+'p_tarball.tar.xz &\n'+\
+                 'cd - \n')
+
+    frun.write('cp cards/singleVLQ_wide/runcmsgrid_PDF4LHC.sh '+dirrun+'\n'+\
+               'cd '+dirrun+"\n"+\
+               './runcmsgrid.sh 30000 '+str(randint(0,10000)) +' 10 > output_'+channel+toMass+str(mass[m])+toWidth+str(width[w])+'p &\n'+\
+               'cd - \n')
+    
 fprocess.close()
 
