@@ -23,6 +23,8 @@ cust="_customizecards.dat"
 proc="_proc_card.dat"
 EM="_extramodels.dat"     
 run="_run_card.dat"
+run="_run_card.dat"
+decay="_madspin_card.dat"
 
 for m in range(0,len(mass)):
   for w in range(0,len(width)):
@@ -35,6 +37,7 @@ for m in range(0,len(mass)):
     fileprocbase =  folderbase+folderbaseMW+slash+folderbaseMW+proc
     fileEMbase =  folderbase+folderbaseMW+slash+folderbaseMW+EM
     filerunbase =  folderbase+folderbaseMW+slash+folderbaseMW+run
+    filerdecaybase =  folderbase+folderbaseMW+slash+folderbaseMW+decay
     #
     folder= channel+slash
     folderMW=channel+toMass+str(mass[m])+toWidth+str(width[w])+"p"
@@ -43,12 +46,14 @@ for m in range(0,len(mass)):
     fileproc =  folder+folderMW+slash+folderMW+proc
     fileEM =  folder+folderMW+slash+folderMW+EM
     filerun =  folder+folderMW+slash+folderMW+run
+    filedecay =  folder+folderMW+slash+folderMW+decay
     #
     process = subprocess.Popen(["mkdir "+folder+folderMW],shell=True,stdout=subprocess.PIPE)
     out = process.stdout.read()
     process = subprocess.Popen(["cp "+fileprocbase+" "+fileproc+"; "+\
                                 "cp "+filecustbase+" "+filecust+"; "+\
                                 "cp "+fileEMbase+" "+fileEM+"; "+\
+                                "cp "+filedecaybase+" "+filedecay+"; "+\
                                 "cp "+filerunbase+" "+filerun+"; "\
                                ],shell=True,stdout=subprocess.PIPE)
     out = process.stdout.read()
@@ -72,4 +77,5 @@ for m in range(0,len(mass)):
        fp.seek(0)
        fp.truncate()
        fp.write(content.replace('80.0', str(float(mass[m]*width[w]/100))))
+
 
