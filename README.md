@@ -43,3 +43,4 @@ Three scripts will be created in $LOCAL/genproductions/bin/MadGraph5_aMCatNLO/
 (do cmsenv)
 
 ./run_bWbj_T.sh ==> run the events (the nevents is) 
+

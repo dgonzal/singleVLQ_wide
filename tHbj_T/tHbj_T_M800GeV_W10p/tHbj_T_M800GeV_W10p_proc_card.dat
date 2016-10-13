@@ -15,7 +15,5 @@ define tt = t t~
 define ww = w+ w-
 import model VLQ_NLO_v3_4FNS_UFO-wh3
 generate p p > tp > t H bb j / x y bp
-add process p p > tp > t~ H bb j / x y bp
-add process p p > tp~ > t H bb j / x y bp  
 add process p p > tp~ > t~ H bb j / x y bp
 output  tHbj_T_M800W10p -nojpeg
