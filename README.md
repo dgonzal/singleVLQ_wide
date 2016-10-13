@@ -1,16 +1,26 @@
 # singleVLQ_wide
 
-The file 'copy_cards.py' copy the four cards of the template 'channel'_M800GeV_W10p in the other mass and width hiphoteses
+Fork and clone https://github.com/cms-sw/genproductions
+
+Load this scripts inside the following folder
+
+cd  $LOCAL/genproductions/bin/MadGraph5_aMCatNLO/cards
+git clone https://github.com/acarvalh/singleVLQ_wide
+
+========================================================================================================
+
+The file 'copy_cards.py' copy the four cards of the template 'channel'_M800GeV_W10p in the other mass and width hiphoteses encoded
+
 To run you do: 
 
 python copy_cards.py 'channel' 
 
-Where for example  'channel' = bWbj_YL
-  ==> note that the intermediary particle and chirality are already chosen with this name
+Where for example  'channel' = bWbj_Y ==> note that the intermediary particle is already chosen with this name
 
 ** You SHOULD have the template cards 'channel'_M800GeV_W10p 
+The chirality is chosen in the customize_cards (the name convention should be clear)
 
-On those please quadruple check:
+Before use please quadruple check:
 
  - The couplings that are on/of in the customize card. 
    This is a version of the param_card.dat, buth only with the relevant parameters to be changed
@@ -20,12 +30,11 @@ On those please quadruple check:
 
 =========================================================================================================
 
-rules about the cards: 
+Three scripts will be created in $LOCAL/genproductions/bin/MadGraph5_aMCatNLO/
 
- - In the proc_cards the name of the output folder should match the beggining of the name of the file
- 
- - The " QCD=1 QED=1 VLQ<=2 " means that I only want processes that have exactly 2 VLQ couplings inside
-   + one QCD coupling to make the additional jet
+./submit_bWbj_T.sh ==> submits the Gridpacks
+./setup_bWbj_T.sh ==> setupt folders to run the events
 
- - The " / x y bp" means that I do NOT want the VLQ in the middle to be one of these
+(do cmsenv)
 
+./run_bWbj_T.sh ==> run the events (the nevents is encoded) 
