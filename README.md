@@ -18,7 +18,12 @@ python copy_cards.py 'channel'
 Where for example  'channel' = bWbj_Y ==> note that the intermediary particle is already chosen with this name
 
 ** You SHOULD have the template cards 'channel'_M800GeV_W10p 
-The chirality is chosen in the customize_cards (the name convention should be clear)
+
+The chirality is chosen in the customize_cards (the name convention should be clear). 
+
+By default all the cards chose the LH chirality. 
+
+==========================================================================================================
 
 Before use please quadruple check:
 
@@ -37,4 +42,4 @@ Three scripts will be created in $LOCAL/genproductions/bin/MadGraph5_aMCatNLO/
 
 (do cmsenv)
 
-./run_bWbj_T.sh ==> run the events (the nevents is encoded) 
+./run_bWbj_T.sh ==> run the events (the nevents is) 
