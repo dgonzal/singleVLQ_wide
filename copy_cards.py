@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# RUN: python copy_cards.py --channel bWbj_TL
+# RUN: python copy_cards.py --channel bWbj_T
 import os, sys, time,math
 import subprocess
 from random import randint
