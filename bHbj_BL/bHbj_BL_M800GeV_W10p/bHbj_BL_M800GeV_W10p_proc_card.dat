@@ -15,5 +15,4 @@ define ww = w+ w-
 define j = p
 import model VLQ_NLO_v3_4FNS_UFO-zh3
 generate p p > bb H bb j / x y tp QED=1 QCD=1 VLQ=2
-add process p p > bb H bb j / x y tp QED=1 QCD=1 VLQ=2 
 output bHbj_BL_M800GeV_W10p -nojpeg
